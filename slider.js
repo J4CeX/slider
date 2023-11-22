@@ -1,22 +1,30 @@
 const leftButton = document.querySelector('.left-arrow');
 const rightButton = document.querySelector('.right-arrow');
-const images = document.getElementsByTagName('img');
+const slides = document.getElementsByTagName('li');
 
-let index = 0;
+let slideIndex = 1;
 
 leftButton.addEventListener('click', () => {
-  index--;
-  if(index < 0)
-    index = images.length - 1;
-  
+  slideIndex--;
+  if(slideIndex < 1)
+    slideIndex = slides.length;
+  showSlides(slideIndex);
 });
 
 rightButton.addEventListener('click', () => {
-  index++;
-  if(index > images.length - 1)
-    index = 0;
-  console.log(index);
-})
+  slideIndex++;
+  if(slideIndex > slides.length)
+    slideIndex = 1;
+  showSlides(slideIndex);
+});
 
-const sliderRoll = document.querySelector('.slider-roll');
-sliderRoll.style.width = `${100*images.length}%`;
+const showSlides = (currentIndex) => {
+  console.log(currentIndex);
+  let i;
+  for(i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[currentIndex - 1].style.display = "block";
+}
+
+showSlides(slideIndex);
